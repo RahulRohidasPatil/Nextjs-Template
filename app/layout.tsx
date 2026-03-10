@@ -1,4 +1,6 @@
+import Header from "@/components/header"
 import type { Metadata } from "next"
+import { ThemeProvider } from "next-themes"
 import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 
@@ -19,11 +21,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <main>{children}</main>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          <main>{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   )
