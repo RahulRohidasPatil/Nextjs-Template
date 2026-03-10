@@ -1,4 +1,5 @@
 import Header from "@/components/header"
+import { ClerkProvider } from "@clerk/nextjs"
 import type { Metadata } from "next"
 import { ThemeProvider } from "next-themes"
 import { Geist, Geist_Mono } from "next/font/google"
@@ -31,8 +32,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main>{children}</main>
+          <ClerkProvider>
+            <Header />
+            <main>{children}</main>
+          </ClerkProvider>
         </ThemeProvider>
       </body>
     </html>
